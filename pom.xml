@@ -16,11 +16,11 @@
     <java.version>11</java.version>
     <testng.version>7.3.0</testng.version>
     <checkstyle.version>8.42</checkstyle.version>
+    <lombok.version>1.18.20</lombok.version>
     <maven-checkstyle-plugin.version>3.1.2</maven-checkstyle-plugin.version>
     <testng.configs.path>${project.basedir}/src/test/resources/testngconfig</testng.configs.path>
     <testSuiteXmlFile>${testng.configs.path}/CalculatorAddSubFunctionsTest.xml</testSuiteXmlFile>
   </properties>
-
   <dependencies>
     <dependency>
       <groupId>com.epam.tat.module4.Calculator</groupId>
@@ -38,7 +38,7 @@
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <version>1.18.20</version>
+      <version>${lombok.version}</version>
     </dependency>
   </dependencies>
   <build>
