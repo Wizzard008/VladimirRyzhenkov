@@ -14,14 +14,27 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>11</java.version>
-    <testng.version>7.3.0</testng.version>
-    <checkstyle.version>8.42</checkstyle.version>
-    <lombok.version>1.18.20</lombok.version>
     <maven-checkstyle-plugin.version>3.1.2</maven-checkstyle-plugin.version>
     <testng.configs.path>${project.basedir}/src/test/resources/testngconfig</testng.configs.path>
     <testSuiteXmlFile>${testng.configs.path}/CalculatorAddSubFunctionsTest.xml</testSuiteXmlFile>
+    <selenium.version>3.141.59</selenium.version>
+    <testng.version>7.3.0</testng.version>
+    <checkstyle.version>8.42</checkstyle.version>
+    <lombok.version>1.18.20</lombok.version>
+    <webdrivermanager.version>4.3.1</webdrivermanager.version>
   </properties>
   <dependencies>
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-java</artifactId>
+      <version>${selenium.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.github.bonigarcia</groupId>
+      <artifactId>webdrivermanager</artifactId>
+      <version>${webdrivermanager.version}</version>
+      <scope>test</scope>
+    </dependency>
     <dependency>
       <groupId>com.epam.tat.module4.Calculator</groupId>
       <artifactId>calculator</artifactId>
@@ -89,9 +102,6 @@
   <profiles>
     <profile>
       <id>AddSubTests</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
       <properties>
         <testSuiteXmlFile>${testng.configs.path}/CalculatorAddSubFunctionsTest.xml</testSuiteXmlFile>
       </properties>
@@ -106,6 +116,21 @@
       <id>AllTestsSuite</id>
       <properties>
         <testSuiteXmlFile>${testng.configs.path}/CalculatorAllTestsSuite.xml</testSuiteXmlFile>
+      </properties>
+    </profile>
+    <profile>
+      <id>Homework#2-Ex.1</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <testSuiteXmlFile>${testng.configs.path}/HW2EX1.xml</testSuiteXmlFile>
+      </properties>
+    </profile>
+    <profile>
+      <id>Homework#2-Ex.2</id>
+      <properties>
+        <testSuiteXmlFile>${testng.configs.path}/HW2EX2.xml</testSuiteXmlFile>
       </properties>
     </profile>
   </profiles>
