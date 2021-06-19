@@ -1,4 +1,4 @@
-package ru.training.at.hw2.ex1;
+package ru.training.at.hw2.ex2;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
