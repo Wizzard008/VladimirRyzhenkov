@@ -7,6 +7,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+import ru.training.at.hw2.util.WebPageTestsCommonConditions;
 
 public class EpamDemoWebPageTests extends WebPageTestsCommonConditions {
 
@@ -21,37 +23,47 @@ public class EpamDemoWebPageTests extends WebPageTestsCommonConditions {
         Assert.assertEquals(actualTitle, expectedTitle);
 
         //3.Perform login
-        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions
-            .elementToBeClickable(By.className("profile-photo"))).click();
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
+            .until(ExpectedConditions.elementToBeClickable(By.className("profile-photo")))
+            .click();
 
-        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions
-            .elementToBeClickable(By.id("name"))).sendKeys(LOGIN_NAME);
+        String userLogin = "Roman";
+        String userPassword = "Jdi1234";
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
+            .until(ExpectedConditions.elementToBeClickable(By.id("name")))
+            .sendKeys(userLogin);
 
-        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions
-            .elementToBeClickable(By.id("password"))).sendKeys(PASSWORD);
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
+            .until(ExpectedConditions.elementToBeClickable(By.id("password")))
+            .sendKeys(userPassword);
 
-        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions
-            .elementToBeClickable(By.id("login-button"))).click();
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
+            .until(ExpectedConditions.elementToBeClickable(By.id("login-button")))
+            .click();
 
         //4. Assert Username is loggined
-        String actualDisplayedUsername = new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions
-            .presenceOfElementLocated(By.id("user-name"))).getText();
+        String actualDisplayedUsername = new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
+            .until(ExpectedConditions.presenceOfElementLocated(By.id("user-name")))
+            .getText();
 
         String expectedUsername = "ROMAN IOVLEV";
         Assert.assertEquals(actualDisplayedUsername, expectedUsername);
 
         //5.Open through the header menu Service -> Different Elements Page
-        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions
-            .elementToBeClickable(By.xpath("//li[@class=\"dropdown\"]/*[@class=\"dropdown-toggle\"]"))).click();
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
+            .until(ExpectedConditions
+                .elementToBeClickable(By.cssSelector("[class=\"dropdown-toggle\"]")))
+            .click();
 
-        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions
-            .elementToBeClickable(By.xpath("//a[contains(@href,\"different-elements.html\")]"))).click();
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
+            .until(
+                ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(@href,\"different-elements.html\")]")))
+            .click();
 
         //6.Select checkboxes - Water, Wind
         List<WebElement> checkboxMenuItems = new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions
             .presenceOfAllElementsLocatedBy(By.className("label-checkbox")));
-        for (WebElement el : checkboxMenuItems
-        ) {
+        for (WebElement el : checkboxMenuItems) {
             if (el.getText().equalsIgnoreCase("Water")) {
                 el.click();
             }
@@ -61,10 +73,9 @@ public class EpamDemoWebPageTests extends WebPageTestsCommonConditions {
         }
 
         //7.Select radio - Selen
-        List<WebElement> radioMenuItems = new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions
-            .presenceOfAllElementsLocatedBy(By.className("label-radio")));
-        for (WebElement el : radioMenuItems
-        ) {
+        List<WebElement> radioMenuItems = new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
+            .until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.className("label-radio")));
+        for (WebElement el : radioMenuItems) {
             if (el.getText().equalsIgnoreCase("Selen")) {
                 el.click();
             }
@@ -72,15 +83,22 @@ public class EpamDemoWebPageTests extends WebPageTestsCommonConditions {
 
         //8.Select in dropdown - Yellow
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions
-            .elementToBeClickable(By.xpath("//option[text()=\"Yellow\"]"))).click();
+            .elementToBeClickable(By.xpath("//option[text()=\"Yellow\"]")))
+                                                       .click();
 
         //9.Assert that
         //• for each checkbox there is an individual log row and value is corresponded to the status of checkbox
         //• for radio button there is a log row and value is corresponded to the status of radio button
         //• for dropdown there is a log row and value is corresponded to the selected value
-        Assert.assertTrue(driver.getPageSource().contains("Colors: value changed to Yellow"));
-        Assert.assertTrue(driver.getPageSource().contains("metal: value changed to  Selen"));
-        Assert.assertTrue(driver.getPageSource().contains("Wind: condition changed to true"));
-        Assert.assertTrue(driver.getPageSource().contains("Water: condition changed to true"));
+        List<WebElement> webpageLogItems = new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
+            .until(ExpectedConditions
+                .presenceOfAllElementsLocatedBy(By.cssSelector("[class=\"panel-body-list logs\"] > li")));
+        String[] actualLogItemsTexts = webpageLogItems.stream().map(WebElement::getText).toArray(String[]::new);
+        String[] expectedPartialLogItemsTexts =
+            {"Colors: value changed to Yellow", "metal: value changed to  Selen", "Wind: condition changed to true",
+                "Water: condition changed to true"};
+
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(actualLogItemsTexts, expectedPartialLogItemsTexts);
     }
 }

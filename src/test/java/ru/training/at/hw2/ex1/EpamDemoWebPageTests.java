@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import ru.training.at.hw2.util.WebPageTestsCommonConditions;
 
 public class EpamDemoWebPageTests extends WebPageTestsCommonConditions {
 
@@ -21,46 +22,51 @@ public class EpamDemoWebPageTests extends WebPageTestsCommonConditions {
         Assert.assertEquals(actualTitle, expectedTitle);
 
         //3.Perform login
-        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions
-            .elementToBeClickable(By.className("profile-photo"))).click();
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
+            .until(ExpectedConditions.elementToBeClickable(By.className("profile-photo")))
+            .click();
 
-        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions
-            .elementToBeClickable(By.id("name"))).sendKeys(LOGIN_NAME);
+        String userLogin = "Roman";
+        String userPassword = "Jdi1234";
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
+            .until(ExpectedConditions.elementToBeClickable(By.id("name")))
+            .sendKeys(userLogin);
 
-        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions
-            .elementToBeClickable(By.id("password"))).sendKeys(PASSWORD);
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
+            .until(ExpectedConditions.elementToBeClickable(By.id("password")))
+            .sendKeys(userPassword);
 
-        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions
-            .elementToBeClickable(By.id("login-button"))).click();
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
+            .until(ExpectedConditions.elementToBeClickable(By.id("login-button")))
+            .click();
 
         //4. Assert Username is loggined
-        String actualDisplayedUsername = new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions
-            .presenceOfElementLocated(By.id("user-name"))).getText();
+        String actualDisplayedUsername = new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
+            .until(ExpectedConditions.presenceOfElementLocated(By.id("user-name")))
+            .getText();
 
         String expectedUsername = "ROMAN IOVLEV";
         Assert.assertEquals(actualDisplayedUsername, expectedUsername);
 
         //5. Assert that there are 4 items on the header section are displayed and they have proper texts
-        List<WebElement> headerMenuButtons = new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions
-            .presenceOfAllElementsLocatedBy(By.xpath("//div[1]/nav[1]/ul[1]/li/a")));
-
-        Assert.assertEquals(headerMenuButtons.size(), 4);
-        Assert.assertEquals(headerMenuButtons.get(0).getText(), "HOME");
-        Assert.assertEquals(headerMenuButtons.get(1).getText(), "CONTACT FORM");
-        Assert.assertEquals(headerMenuButtons.get(2).getText(), "SERVICE");
-        Assert.assertEquals(headerMenuButtons.get(3).getText(), "METALS & COLORS");
+        List<WebElement> headerMenuButtons = new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
+            .until(ExpectedConditions
+                .presenceOfAllElementsLocatedBy(By.cssSelector("[class=\"uui-navigation nav navbar-nav m-l8\"] > li")));
+        String[] actualHeaderMenuTitles = headerMenuButtons.stream().map(WebElement::getText).toArray(String[]::new);
+        String[] expectedHeaderMenuTitles = {"HOME", "CONTACT FORM", "SERVICE", "METALS & COLORS"};
+        Assert.assertEquals(actualHeaderMenuTitles, expectedHeaderMenuTitles);
 
         //6. Assert that there are 4 images on the Index Page and they are displayed
-        List<WebElement> iconsImages = new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions
-            .presenceOfAllElementsLocatedBy(By.xpath("//div[contains(@class,\"icon\")]")));
+        List<WebElement> iconsImages = new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
+            .until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("[class=\"benefit-icon\"]")));
 
         int actualAmountOfPresentImages = iconsImages.size();
         int expectedAmountOfPresentImages = 4;
         Assert.assertEquals(actualAmountOfPresentImages, expectedAmountOfPresentImages);
 
         //7. Assert that there are 4 texts on the Index Page under icons and they have proper text
-        List<WebElement> iconsTextsWebElements =
-            new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions
+        List<WebElement> iconsTextsWebElements = new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
+            .until(ExpectedConditions
                 .presenceOfAllElementsLocatedBy(By.xpath("//span[contains(@class,\"benefit-txt\")]")));
 
         String expectedFirstBoxText = "To include good practices\n"
@@ -74,39 +80,37 @@ public class EpamDemoWebPageTests extends WebPageTestsCommonConditions {
             + "some external projects),\n"
             + "wish to get more…";
 
-        Assert.assertTrue(iconsTextsWebElements.get(0).getText().equalsIgnoreCase(expectedFirstBoxText));
-        Assert.assertTrue(iconsTextsWebElements.get(1).getText().equalsIgnoreCase(expectedSecondBoxText));
-        Assert.assertTrue(iconsTextsWebElements.get(2).getText().equalsIgnoreCase(expectedThirdBoxText));
-        Assert.assertTrue(iconsTextsWebElements.get(3).getText().equalsIgnoreCase(expectedForthBoxText));
+        String[] actualIconsTexts = iconsTextsWebElements.stream().map(WebElement::getText).toArray(String[]::new);
+        String[] expectedIconsTexts =
+            {expectedFirstBoxText, expectedSecondBoxText, expectedThirdBoxText, expectedForthBoxText};
+        Assert.assertEquals(actualIconsTexts, expectedIconsTexts);
 
         //8.Assert that there is the iframe with “Frame Button” exist
-        Assert.assertTrue(driver.getPageSource().contains("iframe"));
+        WebElement iframe = new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
+            .until(ExpectedConditions.presenceOfElementLocated(By.id("frame")));
+        Assert.assertTrue(iframe.isDisplayed());
 
         //9.Switch to the iframe and check that there is “Frame Button” in the iframe
-        WebElement iframe = new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions
-            .presenceOfElementLocated(By.id("frame")));
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
+            .until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(iframe));
 
-        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions
-            .frameToBeAvailableAndSwitchToIt(iframe));
+        WebElement frameButtonWebElement = new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
+            .until(ExpectedConditions.presenceOfElementLocated(By.id("frame-button")));
 
-        Assert.assertTrue(driver.getPageSource().contains("frame-button"));
+        Assert.assertTrue(frameButtonWebElement.isDisplayed());
 
         //10.Switch to original window back
         driver.switchTo().defaultContent();
 
         //11.Assert that there are 5 items in the Left Section are displayed and they have proper text
         List<WebElement> leftSectionMenuWebElements =
-            new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions
-                .presenceOfAllElementsLocatedBy(By.xpath("//ul[@class=\"sidebar-menu left\"]/li/a/span")));
-        String expectedMenuItem1 = "Home";
-        String expectedMenuItem2 = "Contact form";
-        String expectedMenuItem3 = "Service";
-        String expectedMenuItem4 = "Metals & Colors";
-        String expectedMenuItem5 = "Elements packs";
-        Assert.assertEquals(leftSectionMenuWebElements.get(0).getText(), expectedMenuItem1);
-        Assert.assertEquals(leftSectionMenuWebElements.get(1).getText(), expectedMenuItem2);
-        Assert.assertEquals(leftSectionMenuWebElements.get(2).getText(), expectedMenuItem3);
-        Assert.assertEquals(leftSectionMenuWebElements.get(3).getText(), expectedMenuItem4);
-        Assert.assertEquals(leftSectionMenuWebElements.get(4).getText(), expectedMenuItem5);
+            new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
+                .until(ExpectedConditions
+                    .presenceOfAllElementsLocatedBy(By.cssSelector("#mCSB_1_container > ul > li > a > span")));
+
+        String[] actualMenuItemsTexts =
+            leftSectionMenuWebElements.stream().map(WebElement::getText).toArray(String[]::new);
+        String[] expectedMenuItemsTexts = {"Home", "Contact form", "Service", "Metals & Colors", "Elements packs"};
+        Assert.assertEquals(actualMenuItemsTexts, expectedMenuItemsTexts);
     }
 }
