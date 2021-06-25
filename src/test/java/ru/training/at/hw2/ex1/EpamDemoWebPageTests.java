@@ -58,7 +58,7 @@ public class EpamDemoWebPageTests extends WebPageTestsCommonConditions {
 
         //6. Assert that there are 4 images on the Index Page and they are displayed
         List<WebElement> iconsImages = new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
-            .until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("[class=\"benefit-icon\"]")));
+            .until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector(".benefit-icon")));
 
         int actualAmountOfPresentImages = iconsImages.size();
         int expectedAmountOfPresentImages = 4;
@@ -91,8 +91,7 @@ public class EpamDemoWebPageTests extends WebPageTestsCommonConditions {
         Assert.assertTrue(iframe.isDisplayed());
 
         //9.Switch to the iframe and check that there is “Frame Button” in the iframe
-        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
-            .until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(iframe));
+        driver.switchTo().frame(iframe);
 
         WebElement frameButtonWebElement = new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
             .until(ExpectedConditions.presenceOfElementLocated(By.id("frame-button")));
