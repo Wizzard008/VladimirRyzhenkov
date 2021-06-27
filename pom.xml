@@ -120,9 +120,6 @@
     </profile>
     <profile>
       <id>Homework#2-Ex.1</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
       <properties>
         <testSuiteXmlFile>${testng.configs.path}/HW2EX1.xml</testSuiteXmlFile>
       </properties>
@@ -131,6 +128,18 @@
       <id>Homework#2-Ex.2</id>
       <properties>
         <testSuiteXmlFile>${testng.configs.path}/HW2EX2.xml</testSuiteXmlFile>
+      </properties>
+    </profile>
+    <profile>
+      <id>Homework#3-Ex.2</id>
+      <properties>
+        <testSuiteXmlFile>${testng.configs.path}/HW3EX2.xml</testSuiteXmlFile>
+      </properties>
+    </profile>
+    <profile>
+      <id>Homework#3-Ex.1</id>
+      <properties>
+        <testSuiteXmlFile>${testng.configs.path}/HW3EX1.xml</testSuiteXmlFile>
       </properties>
     </profile>
   </profiles>
