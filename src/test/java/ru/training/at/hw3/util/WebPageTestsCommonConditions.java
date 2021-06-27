@@ -14,6 +14,8 @@ public class WebPageTestsCommonConditions {
     public WebPageTestsCommonConditions() {
         userLogin = TestDataReader.getTestData(USER_LOGIN);
         userPassword = TestDataReader.getTestData(USER_PASSWORD);
+        //        userLogin = "Roman";
+        //        userPassword = "Jdi1234";
     }
 
     @BeforeMethod

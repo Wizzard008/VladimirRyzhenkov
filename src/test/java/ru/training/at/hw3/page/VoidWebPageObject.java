@@ -1,10 +1,11 @@
 package ru.training.at.hw3.page;
 
+
 import org.openqa.selenium.WebDriver;
 
-public class VoidWebPageObjectForEx1 extends AbstractPage {
+public class VoidWebPageObject extends AbstractPage {
 
-    public VoidWebPageObjectForEx1(WebDriver driver) {
+    public VoidWebPageObject(WebDriver driver) {
         super(driver);
     }
 
@@ -55,4 +56,26 @@ public class VoidWebPageObjectForEx1 extends AbstractPage {
     public String[] getLeftSectionMenuTexts() {
         return leftSideMenu.getLeftSectionMenuTexts();
     }
+
+    public void openDifferentElementsWebPage() {
+        headerMenu.openDifferentElementsWebPage();
+    }
+
+    public void selectCheckbox(String checkboxItemToBeSelected) {
+        checkbox.selectCheckboxItem(checkboxItemToBeSelected);
+    }
+
+    public void selectSelenRadioButton(String radioButtonToBeSelected) {
+        radioButton.selectRadioButton(radioButtonToBeSelected);
+    }
+
+    public void selectColor(String colorToBeSelected) {
+        colorSelector.selectColor(colorToBeSelected);
+    }
+
+    public String[] getMessagesLogItemsTexts() {
+        return eventLog.getEventLogItemsTexts();
+    }
+
+
 }

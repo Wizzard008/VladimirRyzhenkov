@@ -2,7 +2,7 @@ package ru.training.at.hw3.ex1;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import ru.training.at.hw3.page.VoidWebPageObjectForEx1;
+import ru.training.at.hw3.page.VoidWebPageObject;
 import ru.training.at.hw3.util.WebPageTestsCommonConditions;
 
 public class EpamDemoWebPageTests extends WebPageTestsCommonConditions {
@@ -11,7 +11,7 @@ public class EpamDemoWebPageTests extends WebPageTestsCommonConditions {
     public void demoPageTests(String expectedTitle, String expectedUsername, int expectedAmountOfPresentImages,
                               String[] expectedHeaderMenuTitles, String[] expectedIconsTexts,
                               String[] expectedMenuItemsTexts) {
-        VoidWebPageObjectForEx1 webPageObject = new VoidWebPageObjectForEx1(driver);
+        VoidWebPageObject webPageObject = new VoidWebPageObject(driver);
 
         //1.Open test site by URL
         webPageObject.openWebPage();
