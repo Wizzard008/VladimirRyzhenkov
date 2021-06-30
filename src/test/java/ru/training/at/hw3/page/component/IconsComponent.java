@@ -10,7 +10,7 @@ public class IconsComponent extends AbstractComponent {
     @FindBy(css = ".benefit-icon")
     List<WebElement> iconsImages;
 
-    @FindBy(css = "[class^='benefit-txt']")
+    @FindBy(css = ".benefit-txt")
     List<WebElement> iconsTextsWebElements;
 
     public IconsComponent(WebDriver driver) {
