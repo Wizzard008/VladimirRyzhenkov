@@ -22,7 +22,7 @@ public class HeaderComponent extends AbstractComponent {
     @FindBy(id = "user-name")
     WebElement userCredentials;
 
-    @FindBy(css = "[class='uui-navigation nav navbar-nav m-l8'] > li")
+    @FindBy(css = ".uui-navigation.nav.navbar-nav.m-l8 > li")
     List<WebElement> headerMenuButtons;
 
     @FindBy(css = ".dropdown-toggle")
