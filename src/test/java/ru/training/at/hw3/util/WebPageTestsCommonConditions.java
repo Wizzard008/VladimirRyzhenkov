@@ -8,14 +8,15 @@ public class WebPageTestsCommonConditions {
     protected WebDriver driver;
     public static final String USER_LOGIN = "testdata.user.name";
     public static final String USER_PASSWORD = "testdata.user.password";
+    public static final String USER_CREDENTIALS = "testdata.user.credentials";
     protected String userLogin;
     protected String userPassword;
+    protected String expectedUsername;
 
     public WebPageTestsCommonConditions() {
         userLogin = TestDataReader.getTestData(USER_LOGIN);
         userPassword = TestDataReader.getTestData(USER_PASSWORD);
-        //        userLogin = "Roman";
-        //        userPassword = "Jdi1234";
+        expectedUsername = TestDataReader.getTestData(USER_CREDENTIALS);
     }
 
     @BeforeMethod

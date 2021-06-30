@@ -11,7 +11,7 @@ public class WebPageTestDataProviderEx2 {
     @DataProvider(name = "DataProviderForExercise2")
     public Object[][] testDataSetForEventLogTest() {
         return new Object[][] {
-            {"Home Page", "ROMAN IOVLEV", "Water", "Wind", "Selen", "Yellow", EVENT_LOG_ITEMS}
+            {"Home Page", "Water", "Wind", "Selen", "Yellow", EVENT_LOG_ITEMS}
         };
     }
 }

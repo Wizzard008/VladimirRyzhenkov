@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class EventLogComponent extends AbstractComponent {
 
-    @FindBy(css = "[class=\"panel-body-list logs\"] > li")
+    @FindBy(css = "div.info-panel-section > ul > li")
     List<WebElement> webpageLogItems;
 
     public EventLogComponent(WebDriver driver) {

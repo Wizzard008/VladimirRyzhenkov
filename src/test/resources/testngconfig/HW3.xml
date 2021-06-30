@@ -2,6 +2,7 @@
 <suite name="AllTestsSuite">
   <test name="allFunctionsTest">
     <packages>
+      <package name="ru.training.at.hw3.ex1"/>
       <package name="ru.training.at.hw3.ex2"/>
     </packages>
   </test>

@@ -15,7 +15,7 @@ public class WebPageTestDataProviderEx1 {
     @DataProvider(name = "DataProviderForExercise1")
     public Object[][] testDataSet() {
         return new Object[][] {
-            {"Home Page", "ROMAN IOVLEV", 4, HEADER_MENU_TITLES, INDEX_PAGE_ICONS_TEXTS, LEFT_SECTION_MENU_TITLES}
+            {"Home Page", 4, HEADER_MENU_TITLES, INDEX_PAGE_ICONS_TEXTS, LEFT_SECTION_MENU_TITLES}
         };
     }
 }

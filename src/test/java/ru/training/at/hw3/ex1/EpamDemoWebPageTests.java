@@ -8,7 +8,7 @@ import ru.training.at.hw3.util.WebPageTestsCommonConditions;
 public class EpamDemoWebPageTests extends WebPageTestsCommonConditions {
 
     @Test(dataProvider = "DataProviderForExercise1", dataProviderClass = WebPageTestDataProviderEx1.class)
-    public void demoPageTests(String expectedTitle, String expectedUsername, int expectedAmountOfPresentImages,
+    public void demoPageTests(String expectedTitle, int expectedAmountOfPresentImages,
                               String[] expectedHeaderMenuTitles, String[] expectedIconsTexts,
                               String[] expectedMenuItemsTexts) {
         VoidWebPageObject webPageObject = new VoidWebPageObject(driver);
@@ -40,11 +40,23 @@ public class EpamDemoWebPageTests extends WebPageTestsCommonConditions {
         Assert.assertEquals(actualIconsTexts, expectedIconsTexts);
 
         //8.Assert that there is the iframe
-        Assert.assertTrue(webPageObject.verifyPresenceOfIframe());
+        try {
+            Assert.assertTrue(webPageObject.getIframe().isDisplayed());
+        } catch (NullPointerException e) {
+            Assert.fail();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         //9.Switch to the iframe and check that there is “Frame Button” in the iframe
-        webPageObject.switchToFrame();
-        Assert.assertTrue(webPageObject.verifyPresenceOfButtonOnIframe());
+        driver.switchTo().frame(webPageObject.getIframe());
+        try {
+            Assert.assertTrue(webPageObject.getFrameButton().isDisplayed());
+        } catch (NullPointerException e) {
+            Assert.fail();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         //10.Switch to original window back
         webPageObject.switchToOrigin();

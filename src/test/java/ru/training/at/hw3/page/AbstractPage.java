@@ -21,7 +21,7 @@ public class AbstractPage {
     protected RadioButtonComponent radioButton;
     protected ColorSelectorComponent colorSelector;
     protected EventLogComponent eventLog;
-    protected FrameComponent frame;
+    //    protected FrameComponent frame;
 
     protected AbstractPage(WebDriver driver) {
         this.driver = driver;
@@ -32,6 +32,6 @@ public class AbstractPage {
         colorSelector = new ColorSelectorComponent(driver);
         eventLog = new EventLogComponent(driver);
         icons = new IconsComponent(driver);
-        frame = new FrameComponent(driver);
+        //        frame = new FrameComponent(driver);
     }
 }

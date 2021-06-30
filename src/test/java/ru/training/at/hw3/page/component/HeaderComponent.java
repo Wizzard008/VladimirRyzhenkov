@@ -22,13 +22,13 @@ public class HeaderComponent extends AbstractComponent {
     @FindBy(id = "user-name")
     WebElement userCredentials;
 
-    @FindBy(css = "[class=\"uui-navigation nav navbar-nav m-l8\"] > li")
+    @FindBy(css = "[class='uui-navigation nav navbar-nav m-l8'] > li")
     List<WebElement> headerMenuButtons;
 
     @FindBy(css = ".dropdown-toggle")
     WebElement serviceDropDownMenu;
 
-    @FindBy(xpath = "//a[contains(@href,\"different-elements.html\")]")
+    @FindBy(xpath = "//a[contains(@href,'different-elements.html')]")
     WebElement differentElementsPageLink;
 
     public HeaderComponent(WebDriver driver) {

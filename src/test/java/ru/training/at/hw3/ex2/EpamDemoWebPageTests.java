@@ -9,7 +9,7 @@ import ru.training.at.hw3.util.WebPageTestsCommonConditions;
 public class EpamDemoWebPageTests extends WebPageTestsCommonConditions {
 
     @Test(dataProvider = "DataProviderForExercise2", dataProviderClass = WebPageTestDataProviderEx2.class)
-    public void verificationOfWebPageEventLog(String expectedWebPageTitle, String expectedUserCredentials,
+    public void verificationOfWebPageEventLog(String expectedWebPageTitle,
                                               String checkboxItemToBeSelected1,
                                               String checkboxItemToBeSelected2, String radioButtonToBeSelected,
                                               String colorToBeSelected,
@@ -24,7 +24,7 @@ public class EpamDemoWebPageTests extends WebPageTestsCommonConditions {
         webPageObject.login(userLogin, userPassword);
         //4. Assert Username is loggined
         String actualUserCredentials = webPageObject.getUserCredentials();
-        Assert.assertEquals(actualUserCredentials, expectedUserCredentials);
+        Assert.assertEquals(actualUserCredentials, expectedUsername);
         //5.Open through the header menu Service -> Different Elements Page
         webPageObject.openDifferentElementsWebPage();
         //6.Select checkboxes - Water, Wind
