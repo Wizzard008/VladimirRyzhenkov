@@ -22,6 +22,8 @@
     <checkstyle.version>8.42</checkstyle.version>
     <lombok.version>1.18.20</lombok.version>
     <webdrivermanager.version>4.3.1</webdrivermanager.version>
+    <allure.version>2.13.2</allure.version>
+    <allure.plugin.version>2.10.0</allure.plugin.version>
   </properties>
   <dependencies>
     <dependency>
@@ -53,9 +55,20 @@
       <artifactId>lombok</artifactId>
       <version>${lombok.version}</version>
     </dependency>
+    <dependency>
+      <groupId>io.qameta.allure</groupId>
+      <artifactId>allure-testng</artifactId>
+      <version>${allure.version}</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
+      <plugin>
+        <groupId>io.qameta.allure</groupId>
+        <artifactId>allure-maven</artifactId>
+        <version>${allure.plugin.version}</version>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
@@ -132,12 +145,31 @@
     </profile>
     <profile>
       <id>Homework#3-AllTestsSuite</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
       <properties>
         <testSuiteXmlFile>${testng.configs.path}/HW3.xml</testSuiteXmlFile>
       </properties>
     </profile>
+    <profile>
+      <id>Homework#4-AllTestsSuite</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <testSuiteXmlFile>${testng.configs.path}/HW4.xml</testSuiteXmlFile>
+      </properties>
+    </profile>
   </profiles>
+  <reporting>
+    <excludeDefaults>true</excludeDefaults>
+    <plugins>
+      <plugin>
+        <groupId>io.qameta.allure</groupId>
+        <artifactId>allure-maven</artifactId>
+        <version>${allure.plugin.version}</version>
+        <configuration>
+          <reportVersion>${allure.version}</reportVersion>
+        </configuration>
+      </plugin>
+    </plugins>
+  </reporting>
 </project>
