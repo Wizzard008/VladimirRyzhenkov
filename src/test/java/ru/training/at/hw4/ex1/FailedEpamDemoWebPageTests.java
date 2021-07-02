@@ -3,7 +3,6 @@ package ru.training.at.hw4.ex1;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.testng.annotations.Test;
-import ru.training.at.hw4.page.EpamWebPageObject;
 import ru.training.at.hw4.util.BaseSeleniumTest;
 
 @Feature("Exercise 1 Web Page Fail Test")
@@ -14,7 +13,6 @@ public class FailedEpamDemoWebPageTests extends BaseSeleniumTest {
     public void exercise1WebPageTests(String expectedTitle, int expectedAmountOfPresentImages,
                                       String[] expectedHeaderMenuTitles, String[] expectedIconsTexts,
                                       String[] expectedMenuItemsTexts) {
-        EpamWebPageObject webPageObject = new EpamWebPageObject(driver);
 
         //1.Open test site by URL
         actionStep.openEpamWebPage();

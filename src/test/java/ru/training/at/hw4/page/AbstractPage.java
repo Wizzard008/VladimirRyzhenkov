@@ -4,7 +4,6 @@ import org.openqa.selenium.WebDriver;
 import ru.training.at.hw4.page.component.CheckboxComponent;
 import ru.training.at.hw4.page.component.ColorSelectorComponent;
 import ru.training.at.hw4.page.component.EventLogComponent;
-import ru.training.at.hw4.page.component.FrameComponent;
 import ru.training.at.hw4.page.component.HeaderComponent;
 import ru.training.at.hw4.page.component.IconsComponent;
 import ru.training.at.hw4.page.component.LeftSideMenuComponent;
@@ -21,7 +20,6 @@ public class AbstractPage {
     protected RadioButtonComponent radioButton;
     protected ColorSelectorComponent colorSelector;
     protected EventLogComponent eventLog;
-    protected FrameComponent frame;
 
     protected AbstractPage(WebDriver driver) {
         this.driver = driver;
@@ -32,6 +30,5 @@ public class AbstractPage {
         colorSelector = new ColorSelectorComponent(driver);
         eventLog = new EventLogComponent(driver);
         icons = new IconsComponent(driver);
-        frame = new FrameComponent(driver);
     }
 }

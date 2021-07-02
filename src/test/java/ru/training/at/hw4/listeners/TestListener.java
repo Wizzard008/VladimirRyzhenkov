@@ -13,12 +13,9 @@ import ru.training.at.hw4.driver.WebDriverSingleton;
 
 public class TestListener implements ITestListener {
 
-    //    public void onTestSuccess(ITestResult testResult) {
-    //        saveScreenshot("success");
-    //    }
-
+    @Override
     public void onTestFailure(ITestResult testResult) {
-        saveScreenshot("failure");
+        saveScreenshot("-test failure");
     }
 
     private void saveScreenshot(String message) {

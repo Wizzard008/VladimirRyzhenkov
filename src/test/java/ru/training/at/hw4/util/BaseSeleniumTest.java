@@ -4,13 +4,9 @@ import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Listeners;
 import ru.training.at.hw4.driver.WebDriverSingleton;
-import ru.training.at.hw4.listeners.TestListener;
 import ru.training.at.hw4.steps.ActionStep;
 import ru.training.at.hw4.steps.AssertionStep;
-
-@Listeners({TestListener.class})
 
 public class BaseSeleniumTest {
     protected WebDriver driver;
@@ -27,10 +23,6 @@ public class BaseSeleniumTest {
         userLogin = TestDataReader.getTestData(USER_LOGIN);
         userPassword = TestDataReader.getTestData(USER_PASSWORD);
         expectedUsername = TestDataReader.getTestData(USER_CREDENTIALS);
-
-        //        userLogin = "Roman";
-        //        userPassword = "Jdi1234";
-        //        expectedUsername = "ROMAN IOVLEV";
     }
 
     @BeforeMethod
