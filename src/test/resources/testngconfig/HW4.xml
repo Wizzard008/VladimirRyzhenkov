@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AllTestsSuite">
+  <listeners>
+    <listener class-name="ru.training.at.hw4.listeners.AllureAttachmentListener"/>
+    <listener class-name="ru.training.at.hw4.listeners.TestListener"/>
+  </listeners>
+  <test name="allFunctionsTest">
+    <packages>
+      <package name="ru.training.at.hw4.ex1"/>
+      <package name="ru.training.at.hw4.ex2"/>
+    </packages>
+  </test>
+</suite>
