@@ -4,4 +4,6 @@ target
 .allure
 allure-results
 jenkins
+selenium
+drivers
 

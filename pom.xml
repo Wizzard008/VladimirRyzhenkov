@@ -204,11 +204,17 @@
     </profile>
     <profile>
       <id>Homework#5-AllTestsSuite</id>
+      <properties>
+        <testSuiteXmlFile>${testng.configs.path}/HW5.xml</testSuiteXmlFile>
+      </properties>
+    </profile>
+    <profile>
+      <id>Homework#6-AllTestsSuite</id>
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
       <properties>
-        <testSuiteXmlFile>${testng.configs.path}/HW5.xml</testSuiteXmlFile>
+        <testSuiteXmlFile>${testng.configs.path}/HW6.xml</testSuiteXmlFile>
       </properties>
     </profile>
   </profiles>
