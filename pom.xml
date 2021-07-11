@@ -9,6 +9,7 @@
   <version>1.0-SNAPSHOT</version>
 
   <properties>
+    <driver>chrome</driver>
     <maven.compiler.version>3.8.1</maven.compiler.version>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
@@ -30,8 +31,16 @@
     <aspectj.version>1.9.5</aspectj.version>
     <commons-lang3.version>3.12.0</commons-lang3.version>
     <cucumber-testng.version>6.10.4</cucumber-testng.version>
+    <jdi-light-html.version>1.3.11</jdi-light-html.version>
+    <jdi-light.version>1.3.13</jdi-light.version>
+    <minimal-json.version>0.9.4</minimal-json.version>
   </properties>
   <dependencies>
+    <dependency>
+      <groupId>com.epam.jdi</groupId>
+      <artifactId>jdi-light-html</artifactId>
+      <version>${jdi-light-html.version}</version>
+    </dependency>
     <dependency>
       <groupId>io.cucumber</groupId>
       <artifactId>cucumber-java</artifactId>
@@ -88,6 +97,11 @@
       <artifactId>allure-testng</artifactId>
       <version>${allure.version}</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.eclipsesource.minimal-json</groupId>
+      <artifactId>minimal-json</artifactId>
+      <version>${minimal-json.version}</version>
     </dependency>
   </dependencies>
   <build>
@@ -158,6 +172,12 @@
         </executions>
       </plugin>
     </plugins>
+    <resources>
+      <resource>
+        <directory>src/test/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
   </build>
   <profiles>
     <profile>
@@ -210,11 +230,17 @@
     </profile>
     <profile>
       <id>Homework#6-AllTestsSuite</id>
+      <properties>
+        <testSuiteXmlFile>${testng.configs.path}/HW6.xml</testSuiteXmlFile>
+      </properties>
+    </profile>
+    <profile>
+      <id>Homework#7-AllTestsSuite</id>
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
       <properties>
-        <testSuiteXmlFile>${testng.configs.path}/HW6.xml</testSuiteXmlFile>
+        <testSuiteXmlFile>${testng.configs.path}/HW7.xml</testSuiteXmlFile>
       </properties>
     </profile>
   </profiles>
