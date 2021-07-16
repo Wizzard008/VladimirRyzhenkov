@@ -9,8 +9,7 @@ import org.testng.annotations.BeforeSuite;
 public interface TestsInit {
     @BeforeSuite(alwaysRun = true)
     static void setUp() {
-        killAllSeleniumDrivers();
-        openSite(GdiWebSite.class);
+        openSite(JdiWebSite.class);
     }
 
     @AfterSuite(alwaysRun = true)

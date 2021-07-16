@@ -1,6 +1,6 @@
 package ru.training.at.hw7.states;
 
-import static ru.training.at.hw7.GdiWebSite.indexWebPage;
+import static ru.training.at.hw7.JdiWebSite.indexWebPage;
 import static ru.training.at.hw7.pages.IndexWebPage.headerMenu;
 import static ru.training.at.hw7.pages.IndexWebPage.loginForm;
 import static ru.training.at.hw7.pages.IndexWebPage.userIcon;
@@ -26,7 +26,7 @@ public class TestStates {
     }
 
     @Step
-    public static void login() {
+    public static void loginOnJdiWebSite() {
         openIndexPage();
         if (!userName.isDisplayed()) {
             userIcon.click();
@@ -51,17 +51,17 @@ public class TestStates {
     }
 
     @Step
-    public static void selectColor(String colorName) {
+    public static void selectColorInDropdownMenu(String colorName) {
         colors.select(colorName);
     }
 
     @Step
-    public static void selectMetal(String metalName) {
+    public static void selectMetalsInDropdownMenu(String metalName) {
         metals.select(metalName);
     }
 
     @Step
-    public static void checkVegetable(String[] vegetablesToSelect) {
+    public static void checkVegetablesInDropdownMenu(String[] vegetablesToSelect) {
         Arrays.stream(vegetablesToSelect).forEach(e -> vegetables.select(e));
     }
 
@@ -71,17 +71,17 @@ public class TestStates {
     }
 
     @Step
-    public static void selectElement(String[] elementsToSelect) {
+    public static void selectCheckboxesForElements(String[] elementsToSelect) {
         Arrays.stream(elementsToSelect).forEach(e -> elements.select(e));
     }
 
     @Step
-    public static void submit() {
+    public static void submitMetalsAndColorsForm() {
         submitButton.click();
     }
 
     @Step
-    public static void assertion(String expectedResult) {
+    public static void assertCorrectSummaryValuesRepresentationInLog(String expectedResult) {
         Assert.assertEquals(getActualResult(), expectedResult);
     }
 }

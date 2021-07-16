@@ -5,7 +5,7 @@ import ru.training.at.hw7.pages.IndexWebPage;
 import ru.training.at.hw7.pages.MetalsAndColorsWebPage;
 
 @JSite("https://jdi-testing.github.io/jdi-light/")
-public class GdiWebSite {
+public class JdiWebSite {
     public static IndexWebPage indexWebPage;
     public static MetalsAndColorsWebPage metalsAndColorsWebPage;
 }
