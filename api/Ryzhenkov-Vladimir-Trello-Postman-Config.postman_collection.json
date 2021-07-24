@@ -38,7 +38,8 @@
 					"listen": "prerequest",
 					"script": {
 						"exec": [
-							"pm.collectionVariables.set(\"boardName\",\"ExpectedBoardName\");"
+							"pm.collectionVariables.set(\"boardName\",\"{{$randomCatchPhraseNoun}}\");\r",
+							"pm.collectionVariables.set(\"boardDesc\",\"{{$randomCatchPhrase}}\");"
 						],
 						"type": "text/javascript"
 					}
@@ -97,7 +98,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{BaseUrl}}/?name={{boardName}}",
+					"raw": "{{BaseUrl}}/?name={{boardName}}&desc={{boardDesc}}",
 					"host": [
 						"{{BaseUrl}}"
 					],
@@ -108,6 +109,10 @@
 						{
 							"key": "name",
 							"value": "{{boardName}}"
+						},
+						{
+							"key": "desc",
+							"value": "{{boardDesc}}"
 						}
 					]
 				}
@@ -384,6 +389,10 @@
 		},
 		{
 			"key": "boardDescription",
+			"value": ""
+		},
+		{
+			"key": "boardDesc",
 			"value": ""
 		}
 	]
