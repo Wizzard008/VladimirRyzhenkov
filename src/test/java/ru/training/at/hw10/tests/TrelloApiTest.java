@@ -3,15 +3,12 @@ package ru.training.at.hw10.tests;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.everyItem;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static ru.training.at.hw10.Util.DateAndTimeProvider.getCurrentTimeAsString;
-import static ru.training.at.hw10.core.TrelloServiceObj.badResponseSpecification;
-import static ru.training.at.hw10.core.TrelloServiceObj.getAllBoards;
-import static ru.training.at.hw10.core.TrelloServiceObj.getBoardDesc;
-import static ru.training.at.hw10.core.TrelloServiceObj.getBoardId;
-import static ru.training.at.hw10.core.TrelloServiceObj.getBoardName;
-import static ru.training.at.hw10.core.TrelloServiceObj.getResultBoard;
-import static ru.training.at.hw10.core.TrelloServiceObj.goodResponseSpecification;
-import static ru.training.at.hw10.core.TrelloServiceObj.requestBuilder;
+import static ru.training.at.hw10.core.TrelloBoardServiceObj.badResponseSpecification;
+import static ru.training.at.hw10.core.TrelloBoardServiceObj.getAllBoards;
+import static ru.training.at.hw10.core.TrelloBoardServiceObj.getResultBoard;
+import static ru.training.at.hw10.core.TrelloBoardServiceObj.goodResponseSpecification;
+import static ru.training.at.hw10.core.TrelloBoardServiceObj.requestBuilder;
+import static ru.training.at.hw10.util.DateAndTimeProvider.getCurrentTimeAsString;
 
 import io.restassured.http.Method;
 import java.util.List;
@@ -70,20 +67,22 @@ public class TrelloApiTest extends BaseTest {
         String boardNameInitial = "Demo Board created with pattern";
         String boardNameModified = "Board name modified at" + " " + getCurrentTimeAsString();
 
-        String boardId = getBoardId(
+        String boardId = getResultBoard(
             requestBuilder()
                 .setBoardName(boardNameInitial)
                 .setMethod(Method.POST)
                 .buildRequest()
-                .sendRequest());
+                .sendRequest())
+            .getId();
 
-        String actualBoardName = getBoardName(
+        String actualBoardName = getResultBoard(
             requestBuilder()
                 .setBoardName(boardNameModified)
                 .setBoardId(boardId)
                 .setMethod(Method.PUT)
                 .buildRequest()
-                .sendRequest());
+                .sendRequest())
+            .getName();
 
         assertThat("Verify modification of board name", actualBoardName, equalTo(boardNameModified));
     }
@@ -93,21 +92,23 @@ public class TrelloApiTest extends BaseTest {
         String boardDescInitial = "Demo Board: description";
         String boardDescModified = "Description modified at" + " " + getCurrentTimeAsString();
 
-        String boardId = getBoardId(
+        String boardId = getResultBoard(
             requestBuilder()
                 .setBoardDescription(boardDescInitial)
                 .setBoardName("Board created for Description Modification Testing")
                 .setMethod(Method.POST)
                 .buildRequest()
-                .sendRequest());
+                .sendRequest())
+            .getId();
 
-        String actualBoardDesc = getBoardDesc(
+        String actualBoardDesc = getResultBoard(
             requestBuilder()
                 .setBoardDescription(boardDescModified)
                 .setBoardId(boardId)
                 .setMethod(Method.PUT)
                 .buildRequest()
-                .sendRequest());
+                .sendRequest())
+            .getDesc();
 
         assertThat("Verify modification of board name", actualBoardDesc, equalTo(boardDescModified));
     }
@@ -143,13 +144,14 @@ public class TrelloApiTest extends BaseTest {
         String boardDescription = "Demo Board created with pattern";
         String boardName = "TestBoard";
 
-        String boardId = getBoardId(
+        String boardId = getResultBoard(
             requestBuilder()
                 .setBoardDescription(boardDescription)
                 .setBoardName(boardName)
                 .setMethod(Method.POST)
                 .buildRequest()
-                .sendRequest());
+                .sendRequest())
+            .getId();
 
         requestBuilder()
             .setBoardId(boardId)

@@ -1,4 +1,4 @@
-package ru.training.at.hw10.Util;
+package ru.training.at.hw10.util;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;

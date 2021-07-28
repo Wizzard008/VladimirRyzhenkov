@@ -1,6 +1,6 @@
 target
-sandbox.*
-board.*
+sandbox
+sandbox*.*
 *.iml
 .idea
 .allure

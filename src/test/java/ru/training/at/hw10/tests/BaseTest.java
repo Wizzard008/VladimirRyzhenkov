@@ -1,6 +1,6 @@
 package ru.training.at.hw10.tests;
 
-import static ru.training.at.hw10.core.TrelloServiceObj.deleteAllBoards;
+import static ru.training.at.hw10.core.TrelloBoardServiceObj.deleteAllBoards;
 
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;

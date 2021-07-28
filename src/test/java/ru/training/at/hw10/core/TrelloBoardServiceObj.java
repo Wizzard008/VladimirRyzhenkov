@@ -12,12 +12,13 @@ import io.restassured.http.Method;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.apache.http.HttpStatus;
 import ru.training.at.hw10.beans.TrelloAnswer;
 
-public class TrelloServiceObj {
+public class TrelloBoardServiceObj {
 
     public static final String TRELLO_URL = "https://api.trello.com/1/boards/";
     public static final String API_KEY = "9b7f8f269665ef6c3d04a0ce7e979ae5";
@@ -28,9 +29,43 @@ public class TrelloServiceObj {
     private Method requestMethod;
     private Map<String, String> parameters;
 
-    protected TrelloServiceObj(Map<String, String> parameters, Method method) {
+    protected TrelloBoardServiceObj(Map<String, String> parameters, Method method) {
         this.parameters = parameters;
         this.requestMethod = method;
+    }
+
+    public static class ApiRequestBuilder {
+        private Map<String, String> parameters = new HashMap<>();
+        private Method requestMethod = Method.GET;
+
+        public ApiRequestBuilder setMethod(Method method) {
+            requestMethod = method;
+            return this;
+        }
+
+        public ApiRequestBuilder setBoardId(String boardId) {
+            parameters.put("id", boardId);
+            return this;
+        }
+
+        public ApiRequestBuilder setBoardName(String boardName) {
+            parameters.put("name", boardName);
+            return this;
+        }
+
+        public ApiRequestBuilder setBoardDescription(String boardDescription) {
+            parameters.put("desc", boardDescription);
+            return this;
+        }
+
+        public ApiRequestBuilder setBoardSubscription(Boolean subscription) {
+            parameters.put("subscribed", String.valueOf(subscription));
+            return this;
+        }
+
+        public TrelloBoardServiceObj buildRequest() {
+            return new TrelloBoardServiceObj(parameters, requestMethod);
+        }
     }
 
     public static ApiRequestBuilder requestBuilder() {
@@ -47,18 +82,6 @@ public class TrelloServiceObj {
             .queryParams(parameters)
             .request(requestMethod, TRELLO_URL + boardId)
             .prettyPeek();
-    }
-
-    public static String getBoardId(Response response) {
-        return response.as(TrelloAnswer.class).getId();
-    }
-
-    public static String getBoardName(Response response) {
-        return response.as(TrelloAnswer.class).getName();
-    }
-
-    public static String getBoardDesc(Response response) {
-        return response.as(TrelloAnswer.class).getDesc();
     }
 
     public static TrelloAnswer getResultBoard(Response response) {

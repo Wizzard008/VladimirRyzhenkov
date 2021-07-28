@@ -139,9 +139,9 @@
         <artifactId>jsonschema2pojo-maven-plugin</artifactId>
         <version>1.0.2</version>
         <configuration>
-          <sourceDirectory>${basedir}/src/main/resources/schemes</sourceDirectory>
-          <outputDirectory>${basedir}/src/main/java</outputDirectory>
-          <targetPackage>beans</targetPackage>
+          <sourceDirectory>${project.basedir}/src/test/resources/schemes</sourceDirectory>
+          <outputDirectory>${project.basedir}/src/test/java</outputDirectory>
+          <targetPackage>ru.training.at.hw10.beans</targetPackage>
           <addCompileSourceRoot>true</addCompileSourceRoot>
           <sourceType>json</sourceType>
           <annotationStyle>gson</annotationStyle>
@@ -154,26 +154,6 @@
           </execution>
         </executions>
       </plugin>
-<!--      <plugin>-->
-<!--        <groupId>org.jsonschema2pojo</groupId>-->
-<!--        <artifactId>jsonschema2pojo-maven-plugin</artifactId>-->
-<!--        <version>1.0.2</version>-->
-<!--        <configuration>-->
-<!--          <sourceDirectory>${project.basedir}/src/test/java/ru/training/at/hw10/schemes</sourceDirectory>-->
-<!--          <outputDirectory>${project.basedir}/src/test/java</outputDirectory>-->
-<!--          <targetPackage>ru.training.at.hw10.beans</targetPackage>-->
-<!--          <addCompileSourceRoot>true</addCompileSourceRoot>-->
-<!--          <sourceType>json</sourceType>-->
-<!--          <annotationStyle>gson</annotationStyle>-->
-<!--        </configuration>-->
-<!--        <executions>-->
-<!--          <execution>-->
-<!--            <goals>-->
-<!--              <goal>generate</goal>-->
-<!--            </goals>-->
-<!--          </execution>-->
-<!--        </executions>-->
-<!--      </plugin>-->
       <plugin>
         <groupId>io.qameta.allure</groupId>
         <artifactId>allure-maven</artifactId>
