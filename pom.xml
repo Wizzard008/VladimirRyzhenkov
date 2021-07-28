@@ -34,8 +34,36 @@
     <jdi-light-html.version>1.3.11</jdi-light-html.version>
     <jdi-light.version>1.3.13</jdi-light.version>
     <minimal-json.version>0.9.4</minimal-json.version>
+    <rest-assured.version>4.3.3</rest-assured.version>
+    <hamcrest-core.version>2.2</hamcrest-core.version>
   </properties>
   <dependencies>
+    <dependency>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest</artifactId>
+      <version>2.2</version>
+      <scope>test</scope>
+    </dependency>
+
+
+
+    <dependency>
+      <groupId>io.rest-assured</groupId>
+      <artifactId>rest-assured</artifactId>
+      <version>${rest-assured.version}</version>
+    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>org.hamcrest</groupId>-->
+<!--      <artifactId>hamcrest-core</artifactId>-->
+<!--      <version>${hamcrest-core.version}</version>-->
+<!--    </dependency>-->
+    <dependency>
+      <groupId>com.github.scribejava</groupId>
+      <artifactId>scribejava-apis</artifactId>
+      <version>2.5.3</version>
+      <scope>test</scope>
+    </dependency>
+
     <dependency>
       <groupId>com.epam.jdi</groupId>
       <artifactId>jdi-light-html</artifactId>
@@ -106,6 +134,46 @@
   </dependencies>
   <build>
     <plugins>
+      <plugin>
+        <groupId>org.jsonschema2pojo</groupId>
+        <artifactId>jsonschema2pojo-maven-plugin</artifactId>
+        <version>1.0.2</version>
+        <configuration>
+          <sourceDirectory>${basedir}/src/main/resources/schemes</sourceDirectory>
+          <outputDirectory>${basedir}/src/main/java</outputDirectory>
+          <targetPackage>beans</targetPackage>
+          <addCompileSourceRoot>true</addCompileSourceRoot>
+          <sourceType>json</sourceType>
+          <annotationStyle>gson</annotationStyle>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+<!--      <plugin>-->
+<!--        <groupId>org.jsonschema2pojo</groupId>-->
+<!--        <artifactId>jsonschema2pojo-maven-plugin</artifactId>-->
+<!--        <version>1.0.2</version>-->
+<!--        <configuration>-->
+<!--          <sourceDirectory>${project.basedir}/src/test/java/ru/training/at/hw10/schemes</sourceDirectory>-->
+<!--          <outputDirectory>${project.basedir}/src/test/java</outputDirectory>-->
+<!--          <targetPackage>ru.training.at.hw10.beans</targetPackage>-->
+<!--          <addCompileSourceRoot>true</addCompileSourceRoot>-->
+<!--          <sourceType>json</sourceType>-->
+<!--          <annotationStyle>gson</annotationStyle>-->
+<!--        </configuration>-->
+<!--        <executions>-->
+<!--          <execution>-->
+<!--            <goals>-->
+<!--              <goal>generate</goal>-->
+<!--            </goals>-->
+<!--          </execution>-->
+<!--        </executions>-->
+<!--      </plugin>-->
       <plugin>
         <groupId>io.qameta.allure</groupId>
         <artifactId>allure-maven</artifactId>
@@ -236,11 +304,17 @@
     </profile>
     <profile>
       <id>Homework#7-AllTestsSuite</id>
+      <properties>
+        <testSuiteXmlFile>${testng.configs.path}/HW7.xml</testSuiteXmlFile>
+      </properties>
+    </profile>
+    <profile>
+      <id>Homework#10-AllTestsSuite</id>
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
       <properties>
-        <testSuiteXmlFile>${testng.configs.path}/HW7.xml</testSuiteXmlFile>
+        <testSuiteXmlFile>${testng.configs.path}/HW10.xml</testSuiteXmlFile>
       </properties>
     </profile>
   </profiles>
