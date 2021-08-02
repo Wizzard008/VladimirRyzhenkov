@@ -36,6 +36,7 @@
     <minimal-json.version>0.9.4</minimal-json.version>
     <rest-assured.version>4.3.3</rest-assured.version>
     <hamcrest-core.version>2.2</hamcrest-core.version>
+    <maven-surefire-plugin.environment>user</maven-surefire-plugin.environment>
   </properties>
   <dependencies>
     <dependency>
@@ -134,26 +135,26 @@
   </dependencies>
   <build>
     <plugins>
-      <plugin>
-        <groupId>org.jsonschema2pojo</groupId>
-        <artifactId>jsonschema2pojo-maven-plugin</artifactId>
-        <version>1.0.2</version>
-        <configuration>
-          <sourceDirectory>${project.basedir}/src/test/resources/schemes</sourceDirectory>
-          <outputDirectory>${project.basedir}/src/test/java</outputDirectory>
-          <targetPackage>ru.training.at.hw10.beans</targetPackage>
-          <addCompileSourceRoot>true</addCompileSourceRoot>
-          <sourceType>json</sourceType>
-          <annotationStyle>gson</annotationStyle>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>generate</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
+<!--      <plugin>-->
+<!--        <groupId>org.jsonschema2pojo</groupId>-->
+<!--        <artifactId>jsonschema2pojo-maven-plugin</artifactId>-->
+<!--        <version>1.0.2</version>-->
+<!--        <configuration>-->
+<!--          <sourceDirectory>${project.basedir}/src/test/resources/schemes</sourceDirectory>-->
+<!--          <outputDirectory>${project.basedir}/src/test/java</outputDirectory>-->
+<!--          <targetPackage>ru.training.at.hw10.beans</targetPackage>-->
+<!--          <addCompileSourceRoot>true</addCompileSourceRoot>-->
+<!--          <sourceType>json</sourceType>-->
+<!--          <annotationStyle>gson</annotationStyle>-->
+<!--        </configuration>-->
+<!--        <executions>-->
+<!--          <execution>-->
+<!--            <goals>-->
+<!--              <goal>generate</goal>-->
+<!--            </goals>-->
+<!--          </execution>-->
+<!--        </executions>-->
+<!--      </plugin>-->
       <plugin>
         <groupId>io.qameta.allure</groupId>
         <artifactId>allure-maven</artifactId>
@@ -167,6 +168,9 @@
           <suiteXmlFiles>
             <suiteXmlFile>${testSuiteXmlFile}</suiteXmlFile>
           </suiteXmlFiles>
+          <systemPropertyVariables>
+            <environment>${maven-surefire-plugin.environment}</environment>
+          </systemPropertyVariables>
           <argLine>
             -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
           </argLine>
@@ -286,6 +290,7 @@
       <id>Homework#7-AllTestsSuite</id>
       <properties>
         <testSuiteXmlFile>${testng.configs.path}/HW7.xml</testSuiteXmlFile>
+        <maven-surefire-plugin.environment>qa</maven-surefire-plugin.environment>
       </properties>
     </profile>
     <profile>
